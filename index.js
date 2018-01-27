@@ -54,8 +54,9 @@ app.get(`${apiPrefix}/persons/:id`, (request, response) => {
 })
 
 const generateId = () => {
-  const maxId = persons.length > 0 ? persons.map(n => n.id).sort().reverse()[0] : 1
-  return maxId + 1
+  return Math.floor(Math.random() * 10000) + 100  
+  // const maxId = persons.length > 0 ? persons.map(n => n.id).sort().reverse()[0] : 1
+  // return maxId + 1
 }
 
 app.post(`${apiPrefix}/persons/`, (request, response) => {
