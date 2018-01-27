@@ -35,6 +35,12 @@ app.get(`${apiPrefix}/persons`, (req, res) => {
   res.json(persons)
 })
 
+app.get(`/info`, (req, res) => {
+  const personCount = persons.length; 
+  const infoMessage = `Luettelossa on ${personCount} henkilön tiedot.<p> ${new Date()}</p>`
+  res.send(infoMessage)
+})
+
 app.get(`${apiPrefix}/persons/:id`, (request, response) => {
   const id = Number(request.params.id)
   const person = persons.find(person => person.id === id)
