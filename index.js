@@ -42,6 +42,7 @@ app.get(`/info`, (req, res) => {
 })
 
 app.get(`${apiPrefix}/persons/:id`, (request, response) => {
+  console.log("Palvelimelta...", request.params);
   const id = Number(request.params.id)
   const person = persons.find(person => person.id === id)
 
@@ -59,15 +60,16 @@ const generateId = () => {
 
 app.post(`${apiPrefix}/persons/`, (request, response) => {
   const body = request.body
-
-  if (body.content === undefined) {
-    return response.status(400).json({ error: 'content missing' })
+  console.log(request.body)
+  if (body.number === undefined || body.name === undefined) {
+    return response.status(400).json({ error: 'Some parameters are missing' })
   }
 
+
   const person = {
-    content: body.content,
-    important: body.important || false,
-    date: new Date(),
+    name: body.name,
+    number: body.number,
+    //date: new Date(),
     id: generateId()
   }
 
@@ -76,7 +78,8 @@ app.post(`${apiPrefix}/persons/`, (request, response) => {
   response.json(person)
 })
 
-app.delete('/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response) => {
+  console.log('DELETE-request:', request.params)
   const id = Number(request.params.id)
   persons = persons.filter(person => person.id !== id)
 
