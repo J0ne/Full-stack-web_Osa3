@@ -65,10 +65,16 @@ app.post(`${apiPrefix}/persons/`, (request, response) => {
   if (body.number === undefined || body.name === undefined) {
     return response.status(400).json({ error: 'Some parameters are missing' })
   }
-
-
+  const name = body.name;
+  const personIndex = persons.map(x => x.name)
+    .indexOf(name);
+  console.log('personIndex', personIndex, persons.map(x => x.name) );
+  if(personIndex > -1){
+    return response.status(409).json({ error: 'name must be unique' })
+  }  
+    
   const person = {
-    name: body.name,
+    name: name,
     number: body.number,
     //date: new Date(),
     id: generateId()
