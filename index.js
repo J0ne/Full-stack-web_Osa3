@@ -1,8 +1,13 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const morgan = require('morgan')
 const apiPrefix = '/api'
+morgan.token('data', function (req, res) { return JSON.stringify(req.body) })
+
 app.use(bodyParser.json())
+app.use(morgan(':method :url :data :date'))
+
 
 let persons = [{
     "name": "Arto Hellas",
@@ -68,7 +73,7 @@ app.post(`${apiPrefix}/persons/`, (request, response) => {
   const name = body.name;
   const personIndex = persons.map(x => x.name)
     .indexOf(name);
-  console.log('personIndex', personIndex, persons.map(x => x.name) );
+  // console.log('personIndex', personIndex, persons.map(x => x.name) );
   if(personIndex > -1){
     return response.status(409).json({ error: 'name must be unique' })
   }  
