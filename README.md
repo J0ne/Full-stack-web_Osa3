@@ -4,4 +4,10 @@ Full stack - hommia
 
 3.10 puhelinluettelon backend osa 10
 Heroku:
+https://morning-taiga-32865.herokuapp.com
+
+info:
+https://morning-taiga-32865.herokuapp.com/info
+
+Get all:
 https://morning-taiga-32865.herokuapp.com/api/persons
