@@ -11,3 +11,7 @@ https://morning-taiga-32865.herokuapp.com/info
 
 Get all:
 https://morning-taiga-32865.herokuapp.com/api/persons
+
+
+Tehtävä: 3.11 puhelinluettelo full stack
+Frontend myös Herokuun
