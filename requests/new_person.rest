@@ -1,7 +1,9 @@
+# POST http://localhost:3001/api/persons 
+#https://morning-taiga-32865.herokuapp.com/api/persons
 POST http://localhost:3001/api/persons 
 content-type: application/json
 
 {
-  "name": "Teppo Testinen3",
+  "name": "Teppo Testinen",
   "number": "53242342"
 }
