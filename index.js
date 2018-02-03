@@ -3,6 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const cors = require('cors')
+const Person = require('./models/person')
 
 
 const apiPrefix = '/api'
@@ -42,7 +43,11 @@ app.get('/', (req, res) => {
 })
 
 app.get(`${apiPrefix}/persons`, (req, res) => {
-  res.json(persons)
+  Person.find({})
+    .then(
+    persons => res.json(persons.map(Person.formatPerson))
+  )
+  
 })
 
 app.get(`/info`, (req, res) => {
@@ -54,8 +59,8 @@ app.get(`/info`, (req, res) => {
 app.get(`${apiPrefix}/persons/:id`, (request, response) => {
   console.log("Palvelimelta...", request.params);
   const id = Number(request.params.id)
-  const person = persons.find(person => person.id === id)
-
+  //const person = persons.find(person => person.id === id)
+ Person.find({id}).then( person => Person.formatPerson)
   if (person) {
     response.json(person)
   } else {
@@ -83,16 +88,17 @@ app.post(`${apiPrefix}/persons/`, (request, response) => {
     return response.status(409).json({ error: 'name must be unique' })
   }  
     
-  const person = {
+  const newPerson = new Person({
     name: name,
     number: body.number,
     //date: new Date(),
-    id: generateId()
-  }
+    //id: generateId()
+  })
 
-  persons = persons.concat(person)
-
-  response.json(person)
+  newPerson.save()
+    .then(savedPerson => {
+      response.json(Person.formatPerson(savedPerson))
+    })
 })
 
 app.delete('/api/persons/:id', (request, response) => {
@@ -107,3 +113,11 @@ const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
+
+// const formatPerson = (person) => {
+//   return {
+//     name: person.name,
+//     number: person.number,
+//     id: person._id
+//   }
+// }
