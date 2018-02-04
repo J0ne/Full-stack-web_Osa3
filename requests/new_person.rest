@@ -7,3 +7,7 @@ content-type: application/json
   "name": "Teppo Testinen",
   "number": "53242342"
 }
+#duplikaatit estetty
+# {
+#   "error": "name must be unique"
+# }
