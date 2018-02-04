@@ -15,29 +15,6 @@ app.use(bodyParser.json())
 app.use(morgan(':method :url :data :date'))
 
 
-// let persons = [{
-//     "name": "Arto Hellas",
-//     "number": "040-123456",
-//     "id": 1
-//   },
-//   {
-//     "name": "Martti Tienari",
-//     "number": "040-123456",
-//     "id": 2
-//   },
-//   {
-//     "name": "Arto Järvinen",
-//     "number": "040-123456",
-//     "id": 3
-//   },
-//   {
-//     "name": "Lea Kutvonen",
-//     "number": "040-123456",
-//     "id": 4
-//   }
-// ]
-
-
 app.get('/', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
@@ -48,7 +25,7 @@ app.get(`${apiPrefix}/persons`, (req, res) => {
     persons => res.json(persons.map(Person.formatPerson))
   ).catch(error => {
     console.log(error)
-    response.status(404).end()
+    res.status(404).end()
   })
   
 })
@@ -60,7 +37,7 @@ app.get(`/info`, (req, res) => {
       res.send(infoMessage)
     }).catch(error => {
       console.log(error)
-      response.status(404).end()
+      res.status(404).end()
     })
 })
 
