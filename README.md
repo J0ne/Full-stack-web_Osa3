@@ -15,3 +15,10 @@ https://morning-taiga-32865.herokuapp.com/api/persons
 
 Tehtävä: 3.11 puhelinluettelo full stack
 Frontend myös Herokuun
+
+su 4.2. 17.23:
+3.21* eriytetty sovelluskehitys- ja tuotantotietokanta
+
+mlabissa kannat:
+ds239137/fullstack-persondb-prod
+ds223268/fullstack-personsdb
